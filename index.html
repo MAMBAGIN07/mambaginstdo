@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)file:///Users/mohammedmasoodali/Desktop/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        /* CSS Styles */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #111111;
+        }
+
+        header {
+            background-color: #000;
+            color: white;
+            padding: 1.5% 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .menu-button {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            font-size: 24px;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+        }
+
+        nav {
+            background-color: #110b00;
+            color: white;
+            height: 60%;
+            width: 250px;
+            position: fixed;
+            top: 20%;
+            right: -250px;
+            transition: right 0.3s ease-in-out;
+            z-index: 999;
+            border-radius: 8px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            padding-top: 2em;
+        }
+
+        nav ul li {
+            margin: 2em 0;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-visible {
+            right: 0;
+        }
+
+        .overlay-visible {
+            display: block;
+        }
+
+        section {
+            border: 2px solid #333;
+            background-color: #000;
+            margin: 1em auto;
+            padding: 1em;
+            max-width: 90%;
+            border-radius: 8px;
+        }
+
+        .services, .portfolio-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 1em;
+        }
+
+        .service-card, .portfolio-card {
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1em;
+            width: calc(33% - 2em);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover, .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-card img, .portfolio-card video {
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .full-screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .full-screen-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #111111;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            
+            width: 100%;
+            bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .service-card, .portfolio-card {
+                width: calc(50% - 2em);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-card, .portfolio-card {
+                width: calc(33% - 1em);
+            }
+        }
+    </style>
+    <style>
+         #contact {
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 1em;
+        background-color: #000000;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #contact h2 {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    #contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 0.5em;
+        font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea, .dropdown-container button {
+        padding: 0.75em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        background-color: #222;
+        color: #fff;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .dropdown-container button:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    button[type="submit"] {
+        padding: 1em;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .dropdown-container {
+        position: relative;
+    }
+
+    .dropdown-container button {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1;
+        padding: 1em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-menu label {
+        display: block;
+        color: #fff;
+        margin-bottom: 0.5em;
+    }
+
+    .dropdown-menu input[type="checkbox"] {
+        margin-right: 0.5em;
+    }
+
+    .dropdown-container.active .dropdown-menu {
+        display: block;
+    }
+    </style>
+    <style>
+        .view-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 0.5em 1em; /* Padding for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 1em; /* Space above the button */
+    display: block; /* Block display */
+    width: 100%; /* Full width */
+    text-align: center; /* Center the text */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.view-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+    </style>
+</head>
+<body>
+    <header>
+    <div><img src="./index_files/log1.png" alt="Image description" style="width: 40%; height: auto;"></div>
+    <img src="./index_files/mambs.png" alt="Image description" style="width: 50%; height: auto;">
+        
+        <button class="menu-button">☰</button>
+        <div class="menu-overlay"></div>
+        <nav class="">
+            <ul>
+                <li><a href="file:///Users/mohammedmasoodali/Desktop/index.html#about">About</a></li>
+                <li><a href="file:///Users/mohammedmasoodali/Desktop/index.html#services">Services</a></li>
+                <li><a href="file:///Users/mohammedmasoodali/Desktop/index.html#portfolio">Portfolio</a></li>
+                <li><a href="file:///Users/mohammedmasoodali/Desktop/index.html#contact">Contact</a></li>
+               <li><a href="https://www.instagram.com/_masood_ali_0/" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a></li>
+        <li><a href="https://wa.me/+918861899948" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2 style="color:#fff">About Me</h2>
+        <p style="color:#fff">Hello! I'm Mohammed Masood Ali, a passionate freelancer offering a diverse range of services including web development, video editing, poster making, social media management, UI, and UX design. I am dedicated to delivering exceptional results that meet and exceed client expectations. My approach is client-centric, ensuring every project is tailored to the unique needs and goals of those I work with. I pride myself on being welcoming and approachable, fostering a collaborative environment where ideas flourish. Let's work together to bring your vision to life!</p>
+    </section>
+
+    <section id="services">
+        <h2 style="color:#fff">Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <h3 style="color:#fff">Front end developer</h3>
+                <p style="color: #3f558c;">・HTML</p>  
+           <p style="color: #5d9648;">・CSS</p>
+           <p style="color: #87873a;">・JS</p>
+            </div>
+            <div class="service-card">
+                <h3 style="color:#fff">Video Editing</h3>
+                      <p style="color: #4d4b8f;">・Adobe premier pro</p>
+           <p style="color: #2b23b6;">・After effects</p>
+           <p style="color: #124411;">・Davinci resolve</p>
+            </div>
+            <div class="service-card">
+                <h3 style="color:#fff">multiemedia</h3>
+                      <p style="color: #3291d5;">・Adobe ps</p>
+           <p style="color: #8d27b5;">・Illustrater</p>
+           <p style="color: #1fbfa9;">・canva</p>
+            </div>
+            <div class="service-card">
+                <h3 style="color:#fff">social meadia management</h3>
+                       <p style="color: #c53b3b;">・YouTube</p>
+           <p style="color: #e75eeb;">・Instagram</p>
+           <p style="color: #754a22;">・Content research</p>
+            </div>
+            <div class="service-card">
+                <h3 style="color:#fff">UI</h3>
+                      <p style="color: #ef3883;">・figma</p>
+           <p style="color: #daa1e9;">・Adobe XD</p>
+            </div>
+            <div class="service-card">
+                <h3 style="color:#fff">UX</h3>
+                       <p style="color: #ef3883;">・figma</p>
+           <p style="color: #daa1e9;">・Adobe XD</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 style="color:#fff">Portfolio</h2>
+        <div class="portfolio-items">
+            <div class="portfolio-card">
+                <img src="./index_files/l.png" alt="Project 1 Image">
+                <h3 style="color:#fff">potfolio</h3>
+                <p style="color:#fff">to show case my arts</p>
+                <a href="https://mambagin.netlify.app/">
+    <button class="view-button">View</button></a>
+            </div>
+            <!--
+            <div class="portfolio-card">
+                <img src="file:///Users/mohammedmasoodali/Desktop/image2.jpg" alt="Project 2 Image">
+                <h3 style="color:#fff">Project 2</h3>
+                <p style="color:#fff">Description of project 2.</p>
+            </div>
+            <div class="portfolio-card">
+                <img src="file:///Users/mohammedmasoodali/Desktop/image3.jpg" alt="Project 3 Image">
+                <h3 style="color:#fff">Project 3</h3>
+                <p style="color:#fff">Description of project 3.</p>
+            </div>
+            <div class="portfolio-card">
+                <video controls="">
+                    <source src="video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3 style="color:#fff">Project 4</h3>
+                <p style="color:#fff">Description of project 4.</p>
+            </div>
+            <div class="portfolio-card">
+                <video controls="">
+                    <source src="video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3 style="color:#fff">Project 5</h3>
+                <p style="color:#fff">Description of project 5.</p>
+            </div>
+            <div class="portfolio-card">
+                <video controls="">
+                    <source src="video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3 style="color:#fff">Project 6</h3>
+                <p style="color:#fff">Description of project 6.</p>  -->
+            </div>
+        
+    </section>
+
+    <section id="contact">
+        <h2 style="color:#fff">Contact</h2>
+       <form id="contact-form">
+        <div class="form-group">
+            <label for="name" style="color:#fff">Name</label>
+            <input type="text" id="name" name="name" required="">
+        </div>
+        <div class="form-group">
+            <label for="email" style="color:#fff">Email</label>
+            <input type="email" id="email" name="email" required="">
+        </div>
+        <div class="form-group">
+            <label for="services" style="color:#fff">Services Needed</label>
+            <div class="dropdown-container">
+                <button type="button" id="dropdownButton">Select Services</button>
+                <div id="dropdownMenu" class="dropdown-menu">
+                    <label><input type="checkbox" name="services" value="frontend_development"> Front End Development</label>
+                    <label><input type="checkbox" name="services" value="video_editing"> Video Editing</label>
+                    <label><input type="checkbox" name="services" value="multimedia"> Multimedia</label>
+                    <label><input type="checkbox" name="services" value="social_media_management"> Social Media Management</label>
+                    <label><input type="checkbox" name="services" value="ui_design"> UI Design</label>
+                    <label><input type="checkbox" name="services" value="ux_design"> UX Design</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message" style="color:#fff">Message</label>
+            <textarea id="message" name="message" required=""></textarea>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+    </section>
+
+    <footer>
+        <p>© 2024 mambaginstudio. All rights reserved.</p>
+    </footer>
+
+    <div class="full-screen-overlay" style="display: none;">
+        <button class="close-button">Close</button>
+        <img src="./index_files/l.png" alt="Full-Screen Image">
+    </div>
+
+    <script>
+        // JavaScript for menu toggle and full-screen image view
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.menu-button');
+            const nav = document.querySelector('nav');
+            const overlay = document.querySelector('.menu-overlay');
+            const body = document.querySelector('body');
+
+            menuButton.addEventListener('click', function() {
+                nav.classList.toggle('nav-visible');
+                overlay.classList.toggle('overlay-visible');
+            });
+
+            overlay.addEventListener('click', function() {
+                nav.classList.remove('nav-visible');
+                overlay.classList.remove('overlay-visible');
+            });
+
+            const portfolioImages = document.querySelectorAll('.portfolio-card img');
+            const fullScreenOverlay = document.querySelector('.full-screen-overlay');
+            const fullScreenImage = fullScreenOverlay.querySelector('img');
+            const closeButton = fullScreenOverlay.querySelector('.close-button');
+
+            portfolioImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    fullScreenImage.src = image.src;
+                    fullScreenOverlay.style.display = 'flex';
+                });
+            });
+
+            closeButton.addEventListener('click', function() {
+                fullScreenOverlay.style.display = 'none';
+            });
+
+            fullScreenOverlay.addEventListener('click', function(event) {
+                if (event.target === fullScreenOverlay) {
+                    fullScreenOverlay.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            const dropdownButton = document.getElementById('dropdownButton');
+            const dropdownContainer = document.querySelector('.dropdown-container');
+
+            dropdownButton.addEventListener('click', function(event) {
+                dropdownContainer.classList.toggle('active');
+                event.stopPropagation(); // Prevent the click from bubbling up to the document
+            });
+
+            // Close dropdown menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!dropdownContainer.contains(event.target)) {
+                    dropdownContainer.classList.remove('active');
+                }
+            });
+        });
+
+    </script>
+    <script src="./index_files/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init('NyKb7lQ0U0OCLx_BU'); // Replace with your user ID from EmailJS
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(el => el.value).join(", ");
+
+            // Send email using EmailJS
+            emailjs.send('service_ajic9js', 'template_6z31g3h', {
+                from_name: name,
+                from_email: email,
+                message: message,
+                services: services
+            })
+            .then(function(response) {
+                alert('Thank you for contacting us!');
+            }, function(error) {
+                alert('Failed to send email. Please try again later.');
+            });
+        });
+    </script>
+
+
+
+</body></html>
